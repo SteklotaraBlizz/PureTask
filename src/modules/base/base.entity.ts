@@ -8,8 +8,8 @@ import {
 
 export abstract class AppBaseEntity {
   @ApiProperty()
-  @PrimaryGeneratedColumn('uuid')
-  public readonly id!: string;
+  @PrimaryGeneratedColumn()
+  public readonly id!: number;
 
   @ApiProperty()
   @CreateDateColumn({ name: 'created_at', type: 'timestamp' })

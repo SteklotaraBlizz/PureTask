@@ -11,4 +11,12 @@ export class UserEntity extends AppBaseEntity {
   @ApiProperty()
   @Column({ name: 'password', type: 'varchar', length: 128 })
   public password!: string;
+
+  @ApiProperty()
+  @Column({ name: 'nickname', type: 'varchar', length: 128 })
+  public nickname: string;
+
+  @ApiProperty()
+  @Column({ name: 'age', type: 'smallint' })
+  public age: number;
 }

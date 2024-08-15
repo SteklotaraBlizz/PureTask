@@ -1,8 +1,9 @@
-import { ApiProperty } from '@nestjs/swagger';
+import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
 import { AppBaseEntity } from '../../../modules/base/base.entity';
 import { CardEntity } from '../../../modules/cards/entities/card.entity';
-import { Column, JoinColumn, ManyToOne } from 'typeorm';
+import { Column, Entity, JoinColumn, ManyToOne } from 'typeorm';
 
+@Entity('comments')
 export class CommentEntity extends AppBaseEntity {
   @ApiProperty({ type: () => CardEntity })
   @ManyToOne(() => CardEntity)
@@ -12,4 +13,8 @@ export class CommentEntity extends AppBaseEntity {
   @ApiProperty()
   @Column({ name: 'userId' })
   public cardId!: string;
+
+  @ApiPropertyOptional()
+  @Column({ name: 'field', type: 'varchar', length: 512 })
+  public field: string;
 }
