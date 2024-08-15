@@ -1,9 +1,23 @@
-import { Controller, Delete, Get, Patch, Post } from '@nestjs/common';
+import {
+  Controller,
+  Delete,
+  Get,
+  Patch,
+  Post,
+  UseFilters,
+  UsePipes,
+} from '@nestjs/common';
 import { CardService } from './card.service';
 import { ApiTags } from '@nestjs/swagger';
+import { ValidationPipe } from '../../pipes/validation.pipe';
+import { MainExceptionFilter } from '../../exceptions/main-exception.filter';
+import { AppAuthGuard } from '../auth/guards/guards/appAuth.guard';
 
 @Controller('cards')
 @ApiTags('Cards')
+@UseFilters(MainExceptionFilter)
+@UsePipes(ValidationPipe)
+@AppAuthGuard()
 export class CardController {
   constructor(private readonly cardService: CardService) {}
 

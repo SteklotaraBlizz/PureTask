@@ -6,7 +6,6 @@ import { ValidationPipe } from './pipes/validation.pipe';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
-  await app.listen(3000);
 
   app.useGlobalPipes(new ValidationPipe());
   app.useGlobalFilters(new MainExceptionFilter());
@@ -20,5 +19,7 @@ async function bootstrap() {
 
   const document = SwaggerModule.createDocument(app, config);
   SwaggerModule.setup('docs', app, document);
+
+  await app.listen(3000);
 }
 bootstrap();
