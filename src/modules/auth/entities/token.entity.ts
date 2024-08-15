@@ -12,7 +12,7 @@ export class TokenEntity extends AppBaseEntity {
 
   @ApiProperty()
   @Column({ name: 'userId', nullable: true })
-  public userId?: string;
+  public userId?: number;
 
   @ApiProperty()
   @Column({ type: 'varchar', length: 256 })
