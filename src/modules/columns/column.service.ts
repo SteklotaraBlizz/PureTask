@@ -79,7 +79,7 @@ export class ColumnService {
     });
 
     if (!column)
-      throw MainException.entityNotFound(
+      throw MainException.forbidden(
         `Cannot update column for user with id ${userId}`,
       );
     const savedColumn = await this.columnRepository.save({
@@ -102,7 +102,7 @@ export class ColumnService {
     });
 
     if (!column)
-      throw MainException.entityNotFound(
+      throw MainException.forbidden(
         `Cannot delete column for user with id ${userId}`,
       );
 
