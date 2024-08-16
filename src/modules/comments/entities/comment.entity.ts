@@ -12,7 +12,7 @@ export class CommentEntity extends AppBaseEntity {
 
   @ApiProperty()
   @Column({ name: 'userId' })
-  public cardId!: string;
+  public cardId!: number;
 
   @ApiPropertyOptional()
   @Column({ name: 'field', type: 'varchar', length: 512 })

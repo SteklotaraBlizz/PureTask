@@ -12,7 +12,7 @@ export class CardEntity extends AppBaseEntity {
 
   @ApiProperty()
   @Column({ name: 'userId' })
-  public columnId!: string;
+  public columnId!: number;
 
   @ApiPropertyOptional()
   @Column({ name: 'name', type: 'varchar', length: 128 })

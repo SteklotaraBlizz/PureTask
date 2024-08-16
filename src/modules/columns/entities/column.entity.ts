@@ -12,7 +12,7 @@ export class ColumnEntity extends AppBaseEntity {
 
   @ApiProperty()
   @Column({ name: 'userId' })
-  public userId!: string;
+  public userId!: number;
 
   @ApiPropertyOptional()
   @Column({ name: 'name', type: 'varchar', length: 128 })
