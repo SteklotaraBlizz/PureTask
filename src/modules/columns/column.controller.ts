@@ -20,6 +20,7 @@ import { MainExceptionFilter } from 'src/exceptions/main-exception.filter';
 import { ValidationPipe } from 'src/pipes/validation.pipe';
 import { AppAuthGuard } from '../auth/guards/guards/appAuth.guard';
 import { CardService } from '../cards/card.service';
+import { CommentService } from '../comments/comment.service';
 
 @Controller('columns')
 @ApiTags('Columns')
@@ -30,6 +31,7 @@ export class ColumnController {
   constructor(
     private readonly columnService: ColumnService,
     private readonly cardService: CardService,
+    private readonly commentService: CommentService,
   ) {}
 
   @Post('create')
@@ -45,10 +47,10 @@ export class ColumnController {
     @Req() req: RequestWithUser,
     @Param('id', ParseIntPipe) id: number,
   ) {
-    return this.columnService.getOne(id, req.user.id);
+    return this.columnService.findOne(id, req.user.id);
   }
 
-  @Get(':id/columns')
+  @Get(':id/cards')
   async getCardsByColumnId(
     @Req() req: RequestWithUser,
     @Param('id', ParseIntPipe) id: number,
@@ -56,9 +58,17 @@ export class ColumnController {
     return this.cardService.findAllByColumnId(id, req.user.id);
   }
 
+  @Get(':id/comments')
+  async getCommentsByColumnId(
+    @Req() req: RequestWithUser,
+    @Param('id', ParseIntPipe) id: number,
+  ) {
+    return this.commentService.findAllByColumnId(id, req.user.id);
+  }
+
   @Get()
   async getAll(@Req() req: RequestWithUser) {
-    return this.columnService.getAll(req.user.id);
+    return this.columnService.findAll(req.user.id);
   }
 
   @Patch(':id')

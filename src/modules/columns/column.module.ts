@@ -5,12 +5,14 @@ import { ColumnController } from './column.controller';
 import { ColumnEntity } from './entities/column.entity';
 import { AuthModule } from '../auth/auth.module';
 import { CardModule } from '../cards/card.module';
+import { CommentModule } from '../comments/comment.module';
 
 @Module({
   imports: [
     TypeOrmModule.forFeature([ColumnEntity]),
     forwardRef(() => AuthModule),
     CardModule,
+    CommentModule,
   ],
   providers: [ColumnService],
   controllers: [ColumnController],

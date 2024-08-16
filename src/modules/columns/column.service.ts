@@ -32,7 +32,7 @@ export class ColumnService {
     return new AppSingleResponse(savedColumn);
   }
 
-  async getOne(
+  async findOne(
     id: ColumnEntity['id'],
     userId: UserEntity['id'],
   ): Promise<AppSingleResponse<ColumnEntity>> {
@@ -49,7 +49,7 @@ export class ColumnService {
     return new AppSingleResponse(column);
   }
 
-  async getAll(
+  async findAll(
     id: UserEntity['id'],
   ): Promise<AppSingleResponse<ColumnEntity[]>> {
     const columns = await this.columnRepository.find({

@@ -20,6 +20,7 @@ import { AppAuthGuard } from '../auth/guards/guards/appAuth.guard';
 import { CreateCardRequest } from './dto/create-card.dto';
 import { RequestWithUser } from '../auth/types/request-with-user.type';
 import { UpdateCardRequest } from './dto/update-card.dto';
+import { CommentService } from '../comments/comment.service';
 
 @Controller('cards')
 @ApiTags('Cards')
@@ -27,7 +28,10 @@ import { UpdateCardRequest } from './dto/update-card.dto';
 @UsePipes(ValidationPipe)
 @AppAuthGuard()
 export class CardController {
-  constructor(private readonly cardService: CardService) {}
+  constructor(
+    private readonly cardService: CardService,
+    private readonly commentService: CommentService,
+  ) {}
 
   @Post('create')
   async create(
@@ -48,6 +52,14 @@ export class CardController {
   @Get()
   async getAll(@Req() req: RequestWithUser) {
     return this.cardService.findAll(req.user.id);
+  }
+
+  @Get(':id/comments')
+  async getCommentsByCardId(
+    @Req() req: RequestWithUser,
+    @Param('id', ParseIntPipe) id: number,
+  ) {
+    return this.commentService.findAllByCardId(id, req.user.id);
   }
 
   @Patch(':id')
